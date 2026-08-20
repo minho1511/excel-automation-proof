@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>출고 데이터 자동화 역량 증명</title>
+<style>
+  :root{
+    --bg:#eef1f6; --card:#ffffff; --ink:#0f1b2d; --muted:#5a6b82; --line:#dde3ec;
+    --accent:#0e5bd8; --ok:#128a4a; --okbg:#dcf5e6; --bad:#c02636; --badbg:#fde5e8;
+    --ink-inv:#f4f7fc;
+  }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+    --bg:#0d1420; --card:#151f2f; --ink:#eaf0f8; --muted:#9fb0c6; --line:#26344a;
+    --accent:#5b9bff; --ok:#4cd08a; --okbg:#12331f; --bad:#ff7b8a; --badbg:#3a1620;
+  }}
+  :root[data-theme="dark"]{
+    --bg:#0d1420; --card:#151f2f; --ink:#eaf0f8; --muted:#9fb0c6; --line:#26344a;
+    --accent:#5b9bff; --ok:#4cd08a; --okbg:#12331f; --bad:#ff7b8a; --badbg:#3a1620;
+  }
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.6 "Malgun Gothic","Apple SD Gothic Neo",-apple-system,Segoe UI,sans-serif}
+  .wrap{max-width:860px;margin:0 auto;padding:40px 20px 64px}
+  .eyebrow{color:var(--accent);font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 6px}
+  h1{font-size:30px;line-height:1.25;margin:0 0 10px;letter-spacing:-.02em;text-wrap:balance}
+  .lead{color:var(--muted);font-size:18px;margin:0 0 28px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 22px;margin:16px 0}
+  h2{font-size:19px;margin:0 0 14px;letter-spacing:-.01em}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr}}
+  .panel{border:1px solid var(--line);border-radius:12px;padding:16px}
+  .panel.ok{background:var(--okbg);border-color:transparent}
+  .panel.bad{background:var(--badbg);border-color:transparent}
+  .panel h3{margin:0 0 8px;font-size:15px;display:flex;align-items:center;gap:8px}
+  .tag{font-weight:800;font-size:12px;padding:2px 8px;border-radius:20px}
+  .tag.ok{background:var(--ok);color:#fff} .tag.bad{background:var(--bad);color:#fff}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin-top:4px}
+  th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:700;font-size:12px}
+  td.num{text-align:right;font-variant-numeric:tabular-nums}
+  ul{margin:6px 0 0;padding-left:20px} li{margin:5px 0}
+  .steps{counter-reset:s;list-style:none;padding:0;margin:0}
+  .steps li{counter-increment:s;position:relative;padding:8px 0 8px 40px;border-bottom:1px solid var(--line)}
+  .steps li:last-child{border-bottom:0}
+  .steps li:before{content:counter(s);position:absolute;left:0;top:8px;width:26px;height:26px;border-radius:50%;
+    background:var(--accent);color:#fff;font-weight:800;font-size:13px;display:grid;place-items:center}
+  .kv{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .kv span{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:5px 10px;font-size:13px;font-weight:600}
+  .foot{color:var(--muted);font-size:13px;margin-top:24px;text-align:center}
+  strong.hl{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">엑셀 · 출고 데이터 자동화</p>
+  <h1>“변환”은 누구나 합니다.<br>저는 <strong class="hl">틀리면 멈추는 안전장치</strong>를 만듭니다.</h1>
+  <p class="lead">출고 데이터는 한 건만 틀려도 오배송·클레임입니다. 그래서 저는 예쁜 변환기보다, 조용한 데이터 오염을 잡아 <b>업로드 직전에 차단</b>하는 검증 게이트에 초점을 둡니다. 아래는 실제 작동하는 데모입니다.</p>
+
+  <div class="card">
+    <h2>실제 데모 — 제약 출고 ERP → 물류 업로드 변환</h2>
+    <p style="color:var(--muted);margin:0 0 14px">상단 안내행 2줄 + 헤더 3행 + 맨 아래 ‘합계’ 행이 섞인, 실무와 똑같은 ERP 파일로 검증했습니다.</p>
+    <div class="grid2">
+      <div class="panel ok">
+        <h3>정상 파일 <span class="tag ok">PASS</span></h3>
+        <table>
+          <tr><th>검증 항목</th><th style="text-align:right">결과</th></tr>
+          <tr><td>헤더 위치 자동감지</td><td class="num">3행</td></tr>
+          <tr><td>합계행 자동 제외</td><td class="num">1행</td></tr>
+          <tr><td>품목 행 수</td><td class="num">7</td></tr>
+          <tr><td>총수량 vs 원본합계</td><td class="num">466 = 466 ✓</td></tr>
+        </table>
+        <p style="margin:10px 0 0;font-weight:700;color:var(--ok)">→ 업로드 파일 + 리포트 생성</p>
+      </div>
+      <div class="panel bad">
+        <h3>오염 파일 <span class="tag bad">차단</span></h3>
+        <table>
+          <tr><th>주입한 오류</th><th style="text-align:right">결과</th></tr>
+          <tr><td>수량 오타 48 → 480</td><td class="num">감지</td></tr>
+          <tr><td>총수량 vs 원본합계</td><td class="num">898 ≠ 466 ✗</td></tr>
+          <tr><td>업로드 파일 생성</td><td class="num">차단됨</td></tr>
+          <tr><td>리포트</td><td class="num">불일치 표시</td></tr>
+        </table>
+        <p style="margin:10px 0 0;font-weight:700;color:var(--bad)">→ 틀린 데이터는 절대 업로드로 안 나감</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>구현된 안전장치</h2>
+    <ul>
+      <li><b>헤더 행 자동 감지</b> — 상단 안내행이 몇 줄이든 ‘품목명+수량’ 있는 행을 헤더로 확정 (양식이 조금 바뀌어도 대응).</li>
+      <li><b>합계/소계/총계 행 자동 제외</b> — 안 걸러 업로드하면 유령 오주문이 생기는 가장 흔한 사고를 원천 차단.</li>
+      <li><b>컬럼 동의어 매핑</b> — 품목코드=상품코드=품번처럼 ERP마다 다른 헤더명을 흡수.</li>
+      <li><b>검증 게이트</b> — 변환 총수량이 원본 합계와 일치할 때만 업로드 파일 생성. 불일치·불량행이 있으면 <b>아예 만들지 않음.</b></li>
+      <li><b>박스/낱개 자동계산</b> — 입수 기준으로 박스수·낱개수 분리 산출.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>진행 방식</h2>
+    <ol class="steps">
+      <li>실제 ERP 내보내기 샘플 1개 + 물류사(예: 용마로직스) 업로드 양식을 주십니다.</li>
+      <li><b>24시간 내 실데이터 1차 데모</b> — 여러분 파일로 실제 변환 결과를 먼저 보여드립니다.</li>
+      <li>실컬럼·박스규칙·예외처리를 맞춰 조정 (로직은 그대로, 매핑만 교체).</li>
+      <li>더블클릭 실행 파일(.exe) + 사용법 1장 포함해 <b>5일 내 완납.</b></li>
+    </ol>
+    <div class="kv">
+      <span>Windows 더블클릭 실행</span><span>설치 불필요</span><span>검증 리포트 자동</span><span>양식 변경 대응</span>
+    </div>
+  </div>
+
+  <p class="foot">이 페이지 자체가 “이미 만들 수 있다”는 증거입니다. 실제 파일로 먼저 보여드린 뒤 계약합니다.</p>
+</div>
+</body>
+</html>
